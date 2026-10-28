@@ -15,6 +15,9 @@
   <div class="bg" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div>
   <div id="floaters" aria-hidden="true"></div>
 
+  <!-- Memories button (appears once the card is opened) -->
+  <button id="memFab" class="mem-fab hidden" data-open-memories><span>&#9829;</span> Memories</button>
+
   <!-- Intro screen -->
   <section id="intro" class="intro">
     <div class="envelope-heart" aria-hidden="true">&#9829;</div>
@@ -93,6 +96,7 @@
           <!-- Back cover (right side after the last flip) -->
           <div class="base">
             <h3 class="script">Forever &amp; always</h3>
+            <button class="btn" data-open-memories>Open our memories</button>
             <button id="replay" class="btn ghost">Read it again</button>
           </div>
 
@@ -106,6 +110,55 @@
       <button id="next" class="nav" aria-label="Next page">&#8250;</button>
     </div>
   </main>
+
+  <!-- ================= MEMORIES: poems, pictures, video ================= -->
+  <section id="memories" class="memories hidden" role="dialog" aria-modal="true" aria-label="Our memories">
+    <div class="mem-panel">
+      <button id="memClose" class="mem-close" aria-label="Close memories">&times;</button>
+      <h2 class="script mem-title">Our memories</h2>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" data-tab="poems">Poems</button>
+        <button class="tab" role="tab" data-tab="pictures">Pictures</button>
+        <button class="tab" role="tab" data-tab="video">Video</button>
+      </div>
+
+      <!-- POEMS: copy a whole <article class="poem"> block to add more poems -->
+      <div class="tab-body" id="tab-poems" role="tabpanel">
+        <article class="poem">
+          <h4 class="script" data-slot="poem-1-title">poem title</h4>
+          <p class="slot" data-slot="poem-1">your poem goes here</p>
+        </article>
+        <article class="poem">
+          <h4 class="script" data-slot="poem-2-title">poem title</h4>
+          <p class="slot" data-slot="poem-2">your poem goes here</p>
+        </article>
+      </div>
+
+      <!-- PICTURES: put <img src="pic.jpg" alt=""> inside a .photo div. Copy a <figure> to add more. -->
+      <div class="tab-body gallery hidden" id="tab-pictures" role="tabpanel">
+        <figure class="shot"><div class="photo" data-slot="gallery-1"><span>&#9829;</span><small>photo</small></div><figcaption class="slot" data-slot="gallery-1-caption">&nbsp;</figcaption></figure>
+        <figure class="shot"><div class="photo" data-slot="gallery-2"><span>&#9829;</span><small>photo</small></div><figcaption class="slot" data-slot="gallery-2-caption">&nbsp;</figcaption></figure>
+        <figure class="shot"><div class="photo" data-slot="gallery-3"><span>&#9829;</span><small>photo</small></div><figcaption class="slot" data-slot="gallery-3-caption">&nbsp;</figcaption></figure>
+        <figure class="shot"><div class="photo" data-slot="gallery-4"><span>&#9829;</span><small>photo</small></div><figcaption class="slot" data-slot="gallery-4-caption">&nbsp;</figcaption></figure>
+        <figure class="shot"><div class="photo" data-slot="gallery-5"><span>&#9829;</span><small>photo</small></div><figcaption class="slot" data-slot="gallery-5-caption">&nbsp;</figcaption></figure>
+        <figure class="shot"><div class="photo" data-slot="gallery-6"><span>&#9829;</span><small>photo</small></div><figcaption class="slot" data-slot="gallery-6-caption">&nbsp;</figcaption></figure>
+      </div>
+
+      <!-- VIDEO: replace the .video-slot div with
+           <video controls playsinline src="video.mp4"></video>
+           or a YouTube <iframe>. -->
+      <div class="tab-body hidden" id="tab-video" role="tabpanel">
+        <div class="video-frame">
+          <div class="video-slot" data-slot="video"><span>&#9654;</span><small>your video goes here</small></div>
+        </div>
+        <p class="slot video-caption" data-slot="video-caption">&nbsp;</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tap a picture to see it bigger -->
+  <div id="lightbox" class="lightbox hidden"><img alt=""></div>
 
   <script src="script.js"></script>
 </body>
