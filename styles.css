@@ -237,3 +237,95 @@ h3.script { font-size: 1.9rem; text-align: center; color: var(--violet); line-he
   *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
   .floater { display: none; }
 }
+
+/* ================= Memories ================= */
+.mem-fab {
+  position: fixed; top: 16px; right: 16px; z-index: 5;
+  font: 600 .95rem 'Quicksand', sans-serif; color: #fff; cursor: pointer;
+  padding: .6rem 1.15rem; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .14); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transition: background .25s, transform .25s var(--ease);
+}
+.mem-fab span { color: #f9a8d4; }
+.mem-fab:hover { background: rgba(255, 255, 255, .26); transform: translateY(-2px); }
+
+.memories {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+  background: rgba(20, 5, 45, .72); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  animation: fadeIn .4s ease both;
+}
+.memories.hidden, .lightbox.hidden { display: none !important; }
+@keyframes fadeIn { from { opacity: 0; } }
+
+.mem-panel {
+  position: relative; width: min(900px, 100%); max-height: 92svh; overflow-y: auto;
+  padding: 30px clamp(18px, 4vw, 40px) 36px; border-radius: 26px;
+  background: radial-gradient(circle at 85% 0%, #fff, transparent 50%), linear-gradient(160deg, var(--paper), var(--lilac));
+  box-shadow: 0 30px 80px rgba(10, 0, 30, .6), inset 0 0 0 1px rgba(255, 255, 255, .8);
+  animation: panelIn .6s var(--ease) both;
+}
+@keyframes panelIn { from { opacity: 0; transform: translateY(40px) scale(.95); } }
+
+.mem-close {
+  position: absolute; top: 14px; right: 16px; width: 40px; height: 40px; border-radius: 50%;
+  border: 0; background: rgba(124, 58, 237, .12); color: var(--violet);
+  font-size: 1.7rem; line-height: 1; cursor: pointer; transition: background .2s, transform .2s;
+}
+.mem-close:hover { background: rgba(124, 58, 237, .25); transform: rotate(90deg); }
+.mem-title { text-align: center; font-size: clamp(2.2rem, 7vw, 3.2rem); color: var(--violet); line-height: 1.1; margin-bottom: 18px; }
+
+.tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 26px; flex-wrap: wrap; }
+.tab {
+  font: 600 .95rem 'Quicksand', sans-serif; color: var(--violet); cursor: pointer;
+  padding: .55rem 1.4rem; border-radius: 999px; border: 1.5px solid rgba(124, 58, 237, .3); background: transparent;
+  transition: background .25s, color .25s, transform .2s;
+}
+.tab:hover { transform: translateY(-2px); }
+.tab.active { color: #fff; border-color: transparent; background: linear-gradient(135deg, #a855f7, #ec4899); box-shadow: 0 8px 20px rgba(168, 85, 247, .35); }
+
+.tab-body { animation: fadeIn .45s ease both; }
+.tab-body.hidden { display: none; }
+
+/* poems */
+#tab-poems { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.poem {
+  position: relative; padding: 24px 22px 26px; border-radius: 18px; background: #fff;
+  box-shadow: 0 10px 28px rgba(91, 33, 182, .13); border-left: 5px solid transparent;
+  border-image: linear-gradient(180deg, #a855f7, #ec4899) 1;
+}
+.poem::after { content: '\2665'; position: absolute; right: 16px; top: 12px; color: var(--blush); font-size: 1.1rem; }
+.poem h4 { font-size: 1.7rem; color: var(--violet); margin-bottom: 8px; line-height: 1.15; }
+.poem .slot { text-align: left; white-space: pre-line; min-height: 8rem; }
+
+/* pictures */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 22px; }
+.gallery.hidden { display: none; }
+.shot { background: #fff; padding: 10px 10px 8px; border-radius: 6px; box-shadow: 0 8px 22px rgba(91, 33, 182, .2); transition: transform .35s var(--ease); }
+.shot:nth-child(odd) { transform: rotate(-2deg); }
+.shot:nth-child(even) { transform: rotate(2deg); }
+.shot:hover { transform: rotate(0) scale(1.04); }
+.shot .photo { border-radius: 3px; }
+.shot .photo img { cursor: zoom-in; }
+.shot figcaption { margin-top: 6px; }
+
+/* video */
+.video-frame {
+  position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden;
+  background: linear-gradient(150deg, #5b21b6, #a21caf); box-shadow: 0 18px 44px rgba(91, 33, 182, .35);
+}
+.video-frame video, .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+.video-slot { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; color: #fff; }
+.video-slot span { font-size: 3.2rem; width: 86px; height: 86px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, .18); border: 1.5px solid rgba(255, 255, 255, .5); padding-left: 6px; }
+.video-slot small { opacity: .85; font-size: .9rem; }
+.video-caption { margin-top: 18px; }
+
+/* lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 20px; background: rgba(15, 0, 35, .88); cursor: zoom-out; animation: fadeIn .3s ease both; }
+.lightbox img { max-width: 100%; max-height: 92svh; border-radius: 10px; box-shadow: 0 20px 60px rgba(0, 0, 0, .6); }
+
+@media (max-width: 520px) {
+  .mem-fab { top: 10px; right: 10px; padding: .5rem .95rem; font-size: .85rem; }
+  .mem-panel { padding-top: 56px; }
+}
