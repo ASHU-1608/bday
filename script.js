@@ -3,6 +3,7 @@
   const intro = $('#intro'), stage = $('#stage'), book = $('#book');
   const leaves = [...document.querySelectorAll('.leaf')];
   const prev = $('#prev'), next = $('#next'), counter = $('#counter');
+  const memories = $('#memories'), memFab = $('#memFab'), lightbox = $('#lightbox');
   let flipped = 0; // how many leaves are turned
 
   /* ---------- floating hearts in the background ---------- */
@@ -87,7 +88,7 @@
   });
 
   addEventListener('keydown', (e) => {
-    if (stage.classList.contains('hidden')) return;
+    if (stage.classList.contains('hidden') || !memories.classList.contains('hidden')) return;
     if (e.key === 'ArrowRight') go(1);
     if (e.key === 'ArrowLeft') go(-1);
   });
@@ -102,6 +103,48 @@
     startX = null;
   });
 
+  /* ---------- memories: poems, pictures, video ---------- */
+  const stopMedia = () => memories.querySelectorAll('video').forEach((v) => v.pause());
+
+  function openMemories() {
+    memories.classList.remove('hidden');
+    memories.querySelector('.mem-panel').scrollTop = 0;
+    burst(innerWidth / 2, innerHeight / 2, 14);
+  }
+  function closeMemories() {
+    stopMedia();
+    memories.classList.add('hidden');
+    lightbox.classList.add('hidden');
+  }
+
+  document.querySelectorAll('[data-open-memories]').forEach((b) => b.addEventListener('click', openMemories));
+  $('#memClose').addEventListener('click', closeMemories);
+  memories.addEventListener('click', (e) => { if (e.target === memories) closeMemories(); });
+
+  // tabs
+  document.querySelectorAll('.tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      stopMedia();
+      document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('active', t === tab));
+      document.querySelectorAll('.tab-body').forEach((b) => b.classList.toggle('hidden', b.id !== 'tab-' + tab.dataset.tab));
+    });
+  });
+
+  // tap a picture to enlarge it
+  memories.addEventListener('click', (e) => {
+    const img = e.target.closest('.shot .photo img');
+    if (!img) return;
+    lightbox.querySelector('img').src = img.src;
+    lightbox.classList.remove('hidden');
+  });
+  lightbox.addEventListener('click', () => lightbox.classList.add('hidden'));
+
+  addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!lightbox.classList.contains('hidden')) lightbox.classList.add('hidden');
+    else if (!memories.classList.contains('hidden')) closeMemories();
+  });
+
   /* ---------- open the card ---------- */
   $('#openBtn').addEventListener('click', (e) => {
     burst(e.clientX, e.clientY, 22);
@@ -109,6 +152,7 @@
     setTimeout(() => {
       intro.classList.add('hidden');
       stage.classList.remove('hidden');
+      memFab.classList.remove('hidden');
       fit();
     }, 650);
   });
