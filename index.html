@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday, My Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Dreamy background -->
+  <div class="bg" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i></div>
+  <div id="floaters" aria-hidden="true"></div>
+
+  <!-- Intro screen -->
+  <section id="intro" class="intro">
+    <div class="envelope-heart" aria-hidden="true">&#9829;</div>
+    <p class="script small">a little something, just for you</p>
+    <h1 class="script">Happy Birthday</h1>
+    <button id="openBtn" class="btn">Open your card</button>
+  </section>
+
+  <!-- The card book -->
+  <main id="stage" class="stage hidden">
+    <div class="scaler" id="scaler">
+      <div class="fit" id="fit">
+        <div class="book closed" id="book">
+
+          <!-- Leaf 1: cover / page 1 -->
+          <div class="leaf">
+            <div class="face front cover">
+              <div class="cover-glow"></div>
+              <span class="spark s1">&#10022;</span><span class="spark s2">&#10022;</span><span class="spark s3">&#10022;</span>
+              <div class="cover-heart">&#9829;</div>
+              <h2 class="script cover-title">Happy Birthday</h2>
+              <p class="script cover-sub slot" data-slot="cover-name">his name</p>
+              <p class="tap">tap to open</p>
+            </div>
+            <div class="face back">
+              <div class="photo" data-slot="photo-1"><span>&#9829;</span><small>photo</small></div>
+              <p class="slot caption" data-slot="photo-1-caption">caption</p>
+            </div>
+          </div>
+
+          <!-- Leaf 2: page 2 / page 3 -->
+          <div class="leaf">
+            <div class="face front">
+              <h3 class="script">Dear you,</h3>
+              <p class="slot letter" data-slot="letter-1">your message goes here</p>
+              <span class="corner">&#9829;</span>
+            </div>
+            <div class="face back">
+              <h3 class="script">Things I love about you</h3>
+              <ul class="hearts-list">
+                <li class="slot" data-slot="love-1">&nbsp;</li>
+                <li class="slot" data-slot="love-2">&nbsp;</li>
+                <li class="slot" data-slot="love-3">&nbsp;</li>
+                <li class="slot" data-slot="love-4">&nbsp;</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Leaf 3: page 4 / page 5 -->
+          <div class="leaf">
+            <div class="face front">
+              <div class="polaroid p-a"><div class="photo" data-slot="photo-2"><span>&#9829;</span></div><p class="slot" data-slot="photo-2-caption">&nbsp;</p></div>
+              <div class="polaroid p-b"><div class="photo" data-slot="photo-3"><span>&#9829;</span></div><p class="slot" data-slot="photo-3-caption">&nbsp;</p></div>
+            </div>
+            <div class="face back">
+              <h3 class="script">Our favourite memory</h3>
+              <p class="slot letter" data-slot="memory">your memory goes here</p>
+              <span class="corner">&#9829;</span>
+            </div>
+          </div>
+
+          <!-- Leaf 4: page 6 / page 7 -->
+          <div class="leaf">
+            <div class="face front">
+              <h3 class="script">My wish for you</h3>
+              <p class="slot letter" data-slot="wish">your wish goes here</p>
+              <span class="corner">&#9829;</span>
+            </div>
+            <div class="face back final">
+              <div class="big-heart">&#9829;</div>
+              <p class="script big-love">I love you</p>
+              <p class="slot sign" data-slot="signature">&nbsp;</p>
+            </div>
+          </div>
+
+          <!-- Back cover (right side after the last flip) -->
+          <div class="base">
+            <h3 class="script">Forever &amp; always</h3>
+            <button id="replay" class="btn ghost">Read it again</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="prev" class="nav" aria-label="Previous page">&#8249;</button>
+      <span id="counter" class="counter" aria-live="polite"></span>
+      <button id="next" class="nav" aria-label="Next page">&#8250;</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
